@@ -1,12 +1,13 @@
 import { View, Text, Image, StyleSheet } from "react-native";
 import { Character } from "../types";
-import React from "react";
+import React, { memo } from "react";
 
 type CharacterListItem = {
   character: Character;
 };
 
 const CharacterListItem = ({ character }: CharacterListItem) => {
+  console.log("Re rendering", character.id);
   return (
     <View style={styles.container}>
       <Text style={styles.name}>{character.name}</Text>
@@ -18,6 +19,8 @@ const CharacterListItem = ({ character }: CharacterListItem) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
+    flex: 1,
+    borderRadius: 10,
   },
   name: {
     fontSize: 20,
@@ -32,4 +35,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CharacterListItem;
+export default memo(
+  CharacterListItem,
+  (prevProps, nextProps) => prevProps.character.id === nextProps.character.id
+);
