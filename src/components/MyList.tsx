@@ -42,9 +42,8 @@ const MyList = () => {
         gap: 10,
       }}
       onEndReached={fetchNextPage}
-      ListFooterComponent={() => (
-        <View>{loading && <ActivityIndicator />}</View>
-      )}
+      onEndReachedThreshold={5}
+      ListFooterComponent={() => loading && <ActivityIndicator />}
     />
   );
 
